@@ -63,14 +63,12 @@ get "/vacation/:id/reviews/create" do
     @vacation = vacation_table.where(id: params["id"]).to_a[0]
     reviews_table.insert(vacation_id: params["id"],
                        user_id: session["user_id"],
-                       going: params["going"],
+                       rating: params["rating"],
                        comments: params["comments"])
     view "create_review"
 end
 
 @users_table = users_table
-
-@map_key = map_key
 
 get "/users/new" do
     view "new_user"
