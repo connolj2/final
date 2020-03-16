@@ -46,7 +46,7 @@ get "/vacation/:id" do
     @lat_long = results.first.coordinates
     @lat = "#{@lat_long [0]}"
     @long = "#{@lat_long [1]}"
-    view "vacations"
+    view "vacation"
 end
 
 #Calculated average rating
