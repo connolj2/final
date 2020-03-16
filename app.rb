@@ -49,6 +49,10 @@ get "/vacation/:id" do
     view "vacations"
 end
 
+#Calculated average rating
+@review_count = reviews_table.where(vacation_id: @vacation[:id]).count(:id)
+@avg_rating = reviews_table.where(vacation_id: @vacation[:id]).avg(:rating)
+
 get "/vacation/:id/reviews/new" do
     @vacation = vacations_table.where(id: params[:id]).to_a[0]
     view "new_review"
