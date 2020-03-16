@@ -2,7 +2,8 @@
 require "sinatra"                                                                     #
 require "sinatra/reloader" if development?                                            #
 require "sequel"                                                                      #
-require "logger"                                                                      #
+require "logger"
+require "geocoder"                                                          #
 require "twilio-ruby"                                                                 #
 require "bcrypt"                                                                      #
 connection_string = ENV['DATABASE_URL'] || "sqlite://#{Dir.pwd}/development.sqlite3"  #
@@ -13,6 +14,7 @@ use Rack::Session::Cookie, key: 'rack.session', path: '/', secret: 'secret'     
 before { puts; puts "--------------- NEW REQUEST ---------------"; puts }             #
 after { puts; }                                                                       #
 #######################################################################################
+
 
 vacation_table = DB.from(:vacation)
 reviews_table = DB.from(:reviews)
@@ -25,7 +27,7 @@ end
 
 get "/" do
     puts vacation_table.all
-    @courses = vacation_table.all.to_a
+    @vacation = vacation_table.all.to_a
 
     view "vacation"
 end

@@ -1,0 +1,46 @@
+<div class="row">
+    <div class="col-sm-9">
+        <h2>
+            <i class="fas fa-plane-departure"></i>
+        </h2>
+        <h1><%= @vacation[:title] %></h1>
+        <p><%= @vacation[:description] %></p>
+        <% for review in @reviews %>
+            <div class="media">
+                <% if review[:going] %>
+                    <i class="fas fa-star"></i>
+                <% else %>
+                   <i class="far fa-star"></i>
+                <% end %>
+                <div class="media-body">
+                    <h5 class="mt-0"><%= @users_table.where(id: review[:user_id]).to_a[0][:name] %></h5>
+                    <%= review[:comments] %>
+                </div>
+            </div>
+        <% end %>
+        <p class="mt-5">
+            <% if @current_user %>
+                <a href="/vacation/<%= @vacation[:id] %>/reviews/new" class="btn btn-primary">Give Us the Skinny!</a>
+            <% else %>
+                <a href="/logins/new" class="btn btn-danger">Log In to Submit</a>
+            <% end %>
+        </p>
+    </div>
+    <div class="col-sm-3">
+        <h3>Next Vacation Please!</h3>
+        <p><%= @vacation[:location] %></p>
+        <h3>Must Do's?</h3>
+        <p><%= @vacation[:highlights] %></p>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <h1>Let's Boogie</h1>
+    <iframe
+    width="650"
+    height="500"
+    frameborder="0" style="border:0"
+    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCtovsQvkIUWlNqtYwXY87gEd4ZSmJEhMw&q=<%= "#{@lat}, #{@long}" %>&zoom=6" allowfullscreen>
+    </iframe>
+    <p>
+</div>
