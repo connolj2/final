@@ -14,7 +14,11 @@ use Rack::Session::Cookie, key: 'rack.session', path: '/', secret: 'secret'     
 before { puts; puts "--------------- NEW REQUEST ---------------"; puts }             #
 after { puts; }                                                                       #
 #######################################################################################
+account_sid = ENV["TWILIO_ACCOUNT_SID"]
+auth_token = ENV["TWILIO_AUTH_TOKEN"]
+map_key = ENV["GOOGLE_MAPS_KEY"]
 
+client = Twilio::REST::Client.new(account_sid, auth_token)
 
 vacation_table = DB.from(:vacation)
 reviews_table = DB.from(:reviews)
@@ -38,7 +42,7 @@ get "/vacation/:id" do
     @users_table = users_table
     @location = vacation_table.where(id: params[:id]).to_a[0]
     
-    results = Geocoder.search(@vacation[:location])
+    @results = Geocoder.search(@vacation[:location])
     @lat_long = results.first.coordinates
     @lat = "#{@lat_long [0]}"
     @long = "#{@lat_long [1]}"
@@ -46,7 +50,7 @@ get "/vacation/:id" do
 end
 
 get "/vacation/:id/reviews/new" do
-    @course = courses_table.where(id: params[:id]).to_a[0]
+    @vacation = vacations_table.where(id: params[:id]).to_a[0]
     view "new_review"
 end
 
@@ -59,6 +63,10 @@ get "/vacation/:id/reviews/create" do
                        comments: params["comments"])
     view "create_review"
 end
+
+@users_table = users_table
+
+@map_key = map_key
 
 get "/users/new" do
     view "new_user"

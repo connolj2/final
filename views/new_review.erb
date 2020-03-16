@@ -1,20 +1,28 @@
-<h2>
+<h1>
    <i class="fas fa-sun"></i>
     <h1>How was <%= @vacation[:title]? %></h1>
-</h2>
+</h1>
 
+        <br> </br>
+        <h2>We Want Your Thoughts On <%= @vacation[:title] %></h2>
+        <br> </br>
 
-<form action="/vacation/<%= @vacation[:id] %>/reviews/create">
-  <div class="form-group">
-    <label>Best Vacation Ever?</label>
-    <select class="form-control" name="going">
-      <option value="1">Yes</option>
-      <option value="0">No</option>
-    </select>
-  </div>
-  <div class="form-group">
-    <label>Reviews</label>
-    <textarea class="form-control" rows="3" name="reviews"></textarea>
-  </div>
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
+        <form action="/vacation/<%= @vacation[:id] %>/reviews/create">
+        <div class="form-group">
+            <label>Best Vacation Ever?</label>
+            <select class="form-control" name="rating">
+            <option value="1">Worst Trip of My Life!</option>
+            <option value="2">Could Have Been Better</option>
+            <option value="3">Very Mediocre</option>
+            <option value="4">About As Good As It Gets</option>
+            <option value="5">Memories That Will Last a Lifetime!</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label>Comments</label>
+            <textarea class="form-control" rows="3" name="comments"></textarea>
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
+</div>
