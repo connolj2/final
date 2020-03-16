@@ -34,7 +34,7 @@ get "/" do
     puts vacation_table.all
     @vacation = vacation_table.all.to_a
 
-    view "vacation"
+    view "vacations"
 end
 
 get "/vacation/:id" do
