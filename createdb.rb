@@ -18,7 +18,7 @@ DB.create_table! :reviews do
   foreign_key :user_id
   String :name
   String :email
-  String :rating 
+  Integer :rating 
   String :comments, text: true
 end
 DB.create_table! :users do

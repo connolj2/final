@@ -42,7 +42,7 @@ get "/vacation/:id" do
     @users_table = users_table
     @location = vacation_table.where(id: params[:id]).to_a[0]
     
-    @results = Geocoder.search(@vacation[:location])
+    results = Geocoder.search(@vacation[:location])
     @lat_long = results.first.coordinates
     @lat = "#{@lat_long [0]}"
     @long = "#{@lat_long [1]}"
